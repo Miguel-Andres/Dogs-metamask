@@ -3,15 +3,16 @@ import React  from "react"
 import detectEthereumProvider from "@metamask/detect-provider"
 import{Contract , ethers} from "ethers"
 import myContractManifest from "./contracts/MyContract.json"
+import Navbar from "./components/Navbar"
+import Card from "./components/Card"
 
 export default class App extends React.Component{
-
-
   
 
   constructor(props){
     super(props)
     this.initToAsync()
+    
   }
   
   async initToAsync(){
@@ -63,18 +64,27 @@ export default class App extends React.Component{
     if(this.state == null || this.state.myContract == null|| this.state.data ==null){
       return "Loadinig"
     }
+    
     const adoptionDivs = this.state.data.map((addressAdopcion , i)=>{
 
       if(addressAdopcion == ethers.constants.AddressZero){
         return (
-          <li><a href="#" onClick={(e)=>this.clickAdoptedDog(i) }> { i } adoptar</a></li>
+                  
+          <Card  onClick={(e)=>this.clickAdoptedDog(i) } i={i} key={i} /> 
+          
         )
       }else {
 
-        return ( <li key={i}>{ i } Adopted for <b>{addressAdopcion}</b></li>)
+        return ( <Card key={i} addressAdopcion={addressAdopcion} i={i} adopted={true}/>
+         )
       }
     })
 
-    return (<ul>{adoptionDivs}</ul>)
+    return (
+    <>
+    <Navbar/>
+    <div style={{alignItems:"center" ,display:"flex",flexDirection:"column"}}>{adoptionDivs}</div>
+    </>
+    )
   }
 }
