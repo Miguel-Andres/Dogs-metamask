@@ -1,6 +1,6 @@
 import React from 'react'
 import "../style.css"
-import dogimg from "../components/dog.png"
+import dogimg from "../components/Dog.png"
 export default function Navbar() {
   return (
     <>
