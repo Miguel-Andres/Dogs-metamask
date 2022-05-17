@@ -5,6 +5,7 @@ import{Contract , ethers} from "ethers"
 import myContractManifest from "./contracts/MyContract.json"
 import Navbar from "./components/Navbar"
 import Card from "./components/Card"
+import Loading from "./components/Loading"
 
 export default class App extends React.Component{
   
@@ -26,9 +27,6 @@ export default class App extends React.Component{
   })
 
   }
-
-
-
   async getBlockchain(){
     let provider = await detectEthereumProvider()
     if(provider){
@@ -62,7 +60,7 @@ export default class App extends React.Component{
 
   render(){
     if(this.state == null || this.state.myContract == null|| this.state.data ==null){
-      return "Loadinig"
+      return <Loading />
     }
     
     const adoptionDivs = this.state.data.map((addressAdopcion , i)=>{
